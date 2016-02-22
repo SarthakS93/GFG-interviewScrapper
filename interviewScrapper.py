@@ -1,10 +1,17 @@
 import pdfkit
 from bs4 import BeautifulSoup
 import requests
+import os
+import sys
 
-mainURL = 'http://www.geeksforgeeks.org/tag/snapdeal/'
+mainURL = 'http://www.geeksforgeeks.org/tag/'
 visited = {}
-path = '/home/sarthak/mvFiles/'
+mainPath = os.path.dirname(os.path.abspath('interviewScrapper.py'))
+target = sys.argv[1]
+url = mainURL + target + '/'
+os.makedirs(target)
+path = mainPath + '/' + target + '/'
+pattern = target + '-interview'
 
 def magic(url):
 	if url in visited:
@@ -18,11 +25,11 @@ def magic(url):
 	for l in myFind:
 		if l.has_attr('href'):
 			temp = l.get('href')
-			if 'snapdeal-interview' in temp:
+			if pattern in temp:
 				if not temp.split('/')[-1] == '#respond':
 					myLinks.append(temp)
 
-	if 'snapdeal-interview' in url:
+	if pattern in url:
 		save_PDF(url)
 
 	for i in myLinks:
@@ -35,4 +42,11 @@ def save_PDF(url):
 	name = url.split('/')[-2]
 	pdfkit.from_url(url, path + name)
 
-magic(mainURL)
+#magic(mainURL)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print("Please enter valid arguments")
+    else:
+        magic(url)
