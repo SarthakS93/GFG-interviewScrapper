@@ -40,7 +40,7 @@ def magic(url):
 def save_PDF(url):
 	print(url)
 	name = url.split('/')[-2]
-	pdfkit.from_url(url, path + name)
+	pdfkit.from_url(url, path + name + '.pdf')
 
 #magic(mainURL)
 

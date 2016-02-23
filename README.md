@@ -9,6 +9,9 @@ example - python3 snapdeal
 This creates a folder named 'snapdeal' in the directory where the script is placed and 
 the pdf's are downloaded in that folder.
 
+NOTE-
+Works on linux, Mac OS
+
 TODO-
 It sometimes doesent fetch all the experiences of companies which have more than 1 page 
 of links.
